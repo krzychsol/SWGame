@@ -1,0 +1,78 @@
+<div class="game">
+  <div class="game__header">
+    <h1 class="game__title">Star Wars Battle: People vs Starships</h1>
+  </div>
+
+  <div class="game__scoreboard">
+    <mat-card class="game__scoreboard-card">
+      <mat-card-title class="game__scoreboard-title">Scoreboard</mat-card-title>
+      <mat-card-content class="game__scoreboard-content">
+        <div class="game__scoreboard-item">
+          <span>Left Wins:</span> {{ (leftWins$ | async) ?? 0 }}
+        </div>
+        <div class="game__scoreboard-item">
+          <span>Right Wins:</span> {{ (rightWins$ | async) ?? 0 }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="game__cards">
+    @if (left) {
+      <mat-card class="card">
+        <mat-card-header class="card__header">
+          <mat-card-title class="card__title">{{ isPersonGame ? 'Person' : 'Starship' }} (Left)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card__content">
+          <p><strong>Name:</strong> {{ left.name }}</p>
+          @if (isPersonGame) {
+            <p><strong>Height:</strong> {{ left.height }} cm</p>
+            <p><strong>Mass:</strong> {{ left.mass }} kg</p>
+            <p><strong>Gender:</strong> {{ left.gender }}</p>
+            <p><strong>Birth Year:</strong> {{ left.birth_year }}</p>
+          } @else {
+            <p><strong>Crew:</strong> {{ left.crew }}</p>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+
+    @if (right) {
+      <mat-card class="card">
+        <mat-card-header class="card__header">
+          <mat-card-title class="card__title">{{ isPersonGame ? 'Person' : 'Starship' }} (Right)</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card__content">
+          <p><strong>Name:</strong> {{ right.name }}</p>
+          @if (isPersonGame) {
+            <p><strong>Height:</strong> {{ right.height }} cm</p>
+            <p><strong>Mass:</strong> {{ right.mass }} kg</p>
+            <p><strong>Gender:</strong> {{ right.gender }}</p>
+            <p><strong>Birth Year:</strong> {{ right.birth_year }}</p>
+          } @else {
+            <p><strong>Crew:</strong> {{ right.crew }}</p>
+          }
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+
+  @if (winner) {
+    <div class="game__result">
+      <h2 class="game__result-text">{{ winner }}</h2>
+    </div>
+  }
+
+  <div class="game__actions">
+    <button mat-raised-button color="primary" (click)="play()" [disabled]="loading">
+      Play
+    </button>
+  </div>
+
+  @if (loading) {
+    <div class="game__loading">
+      <mat-spinner diameter="50"></mat-spinner>
+      <p>Loading...</p>
+    </div>
+  }
+</div>

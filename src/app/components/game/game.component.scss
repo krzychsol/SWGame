@@ -1,0 +1,122 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+
+  &__header {
+    margin-bottom: 20px;
+    
+    .game__title {
+      font-size: 2.5em;
+      color: #3f51b5;
+      text-align: center;
+    }
+  }
+
+  &__scoreboard {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+
+    .game__scoreboard-card {
+      background-color: #f0f0f0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .game__scoreboard-title {
+      font-size: 1.5em;
+      margin-bottom: 15px;
+      color: #3f51b5;
+    }
+
+    .game__scoreboard-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    .card {
+      width: 300px;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+
+      &__header {
+        margin-bottom: 15px;
+
+        .card__title {
+          font-size: 1.5em;
+          color: #3f51b5;
+        }
+      }
+
+      &__content {
+        font-size: 1.1em;
+        p {
+          margin: 8px 0;
+          strong {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  &__result {
+    margin-top: 20px;
+
+    .game__result-text {
+      font-size: 2em;
+      font-weight: bold;
+      color: #ff5722;
+    }
+  }
+
+  &__actions {
+    margin-top: 30px;
+
+    button {
+      padding: 10px 20px;
+      font-size: 1.2em;
+    }
+  }
+
+  &__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+
+    p {
+      margin-top: 10px;
+      font-size: 1.2em;
+      color: #3f51b5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .game__cards {
+      flex-direction: column;
+      align-items: center;
+
+      .card {
+        width: 100%;
+      }
+    }
+
+    .game__scoreboard {
+      width: 100%;
+    }
+  }
+}
