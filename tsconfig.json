@@ -19,6 +19,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
+    "types": [
+      "cypress"
+    ],
     "lib": [
       "ES2022",
       "dom"
