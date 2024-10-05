@@ -18,8 +18,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-  left: Person | Starship | null = null;
-  right: Person | Starship | null = null;
+  left!: any;
+  right!: any;
   winner: string | null = null;
   isPersonGame: boolean = false;
   loading: boolean = false;
@@ -80,39 +80,51 @@ export class GameComponent {
       }
     }
   }
-
+  
   compareMass(): void {
-    const leftMass = parseInt((this.left as Person).mass);
-    const rightMass = parseInt((this.right as Person).mass);
-
-    if (leftMass > rightMass) {
-      this.winner = 'Left wins by mass!';
-      this.store.dispatch(new IncrementLeftWins());
-    } else if (leftMass < rightMass) {
-      this.winner = 'Right wins by mass!';
-      this.store.dispatch(new IncrementRightWins());
-    } else {
-      this.winner = 'Draw on mass!';
+    if (this.isPerson(this.left) && this.isPerson(this.right)) {
+      const leftMass = parseInt(this.left.mass);
+      const rightMass = parseInt(this.right.mass);
+  
+      if (leftMass > rightMass) {
+        this.winner = 'Left wins by mass!';
+        this.store.dispatch(new IncrementLeftWins());
+      } else if (leftMass < rightMass) {
+        this.winner = 'Right wins by mass!';
+        this.store.dispatch(new IncrementRightWins());
+      } else {
+        this.winner = 'Draw on mass!';
+      }
     }
   }
-
+  
   compareCrew(): void {
-    const leftCrew = parseInt((this.left as Starship).crew);
-    const rightCrew = parseInt((this.right as Starship).crew);
-
-    if (leftCrew > rightCrew) {
-      this.winner = 'Left wins by crew!';
-      this.store.dispatch(new IncrementLeftWins());
-    } else if (leftCrew < rightCrew) {
-      this.winner = 'Right wins by crew!';
-      this.store.dispatch(new IncrementRightWins());
-    } else {
-      this.winner = 'Draw on crew!';
+    if (this.isStarship(this.left) && this.isStarship(this.right)) {
+      const leftCrew = parseInt(this.left.crew);
+      const rightCrew = parseInt(this.right.crew);
+  
+      if (leftCrew > rightCrew) {
+        this.winner = 'Left wins by crew!';
+        this.store.dispatch(new IncrementLeftWins());
+      } else if (leftCrew < rightCrew) {
+        this.winner = 'Right wins by crew!';
+        this.store.dispatch(new IncrementRightWins());
+      } else {
+        this.winner = 'Draw on crew!';
+      }
     }
   }
 
   handleError(error: any): void {
     console.error('API Error:', error);
     this.loading = false;
+  }
+
+  private isPerson(obj: Person | Starship): obj is Person {
+    return (obj as Person).mass !== undefined;
+  }
+
+  private isStarship(obj: Person | Starship): obj is Starship {
+    return (obj as Starship).crew !== undefined;
   }
 }
