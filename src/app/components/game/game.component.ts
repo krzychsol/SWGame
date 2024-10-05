@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SwapiService } from '../../services/swapi.service';
 import { GameState, IncrementLeftWins, IncrementRightWins } from '../../store/game-state';
 import { forkJoin, map, Observable } from 'rxjs';
@@ -17,12 +17,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
 })
-export class GameComponent {
+export class GameComponent implements OnInit {
   left!: Person | Starship;
   right!: Person | Starship;
   winner: string | null = null;
-  isPersonGame: boolean = false;
-  loading: boolean = false;
+  isPersonGame = false;
+  loading = false;
 
   leftWins$!: Observable<number>;
   rightWins$!: Observable<number>;
@@ -115,7 +115,7 @@ export class GameComponent {
     }
   }
 
-  handleError(error: any): void {
+  handleError(error: string): void {
     console.error('API Error:', error);
     this.loading = false;
   }
