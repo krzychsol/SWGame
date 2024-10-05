@@ -25,12 +25,12 @@
         </mat-card-header>
         <mat-card-content class="card__content">
           <p><strong>Name:</strong> {{ left.name }}</p>
-          @if (isPersonGame) {
+          @if (isPersonGame && isPerson(left)) {
             <p><strong>Height:</strong> {{ left.height }} cm</p>
             <p><strong>Mass:</strong> {{ left.mass }} kg</p>
             <p><strong>Gender:</strong> {{ left.gender }}</p>
             <p><strong>Birth Year:</strong> {{ left.birth_year }}</p>
-          } @else {
+          } @else if (isStarship(left)) {
             <p><strong>Crew:</strong> {{ left.crew }}</p>
           }
         </mat-card-content>
@@ -44,12 +44,12 @@
         </mat-card-header>
         <mat-card-content class="card__content">
           <p><strong>Name:</strong> {{ right.name }}</p>
-          @if (isPersonGame) {
+          @if (isPersonGame && isPerson(right)) {
             <p><strong>Height:</strong> {{ right.height }} cm</p>
             <p><strong>Mass:</strong> {{ right.mass }} kg</p>
             <p><strong>Gender:</strong> {{ right.gender }}</p>
             <p><strong>Birth Year:</strong> {{ right.birth_year }}</p>
-          } @else {
+          } @else if (isStarship(right)) {
             <p><strong>Crew:</strong> {{ right.crew }}</p>
           }
         </mat-card-content>

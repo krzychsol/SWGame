@@ -18,8 +18,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
   styleUrls: ['./game.component.scss'],
 })
 export class GameComponent {
-  left!: any;
-  right!: any;
+  left!: Person | Starship;
+  right!: Person | Starship;
   winner: string | null = null;
   isPersonGame: boolean = false;
   loading: boolean = false;
@@ -120,11 +120,11 @@ export class GameComponent {
     this.loading = false;
   }
 
-  private isPerson(obj: Person | Starship): obj is Person {
+  isPerson(obj: Person | Starship): obj is Person {
     return (obj as Person).mass !== undefined;
   }
 
-  private isStarship(obj: Person | Starship): obj is Starship {
+  isStarship(obj: Person | Starship): obj is Starship {
     return (obj as Starship).crew !== undefined;
   }
 }
